@@ -1,0 +1,19 @@
+name : 06 - Contexts
+on : 
+    push:
+    workflow_dispatch:
+
+jobs: 
+  echo-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display Information 
+        run: | 
+            echo "Ref": 
+            echo "SHA":
+            echo "Actor":
+            echo "Workflow":
+            echo "Run ID":
+            echo "Run number":
+      - name: Retrieve Variable
+        run: echo ${{env.MY_VAR}}
