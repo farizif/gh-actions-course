@@ -8,12 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Display Information 
+        env:
+            GITHUB_CONTEXT: ${{ toJson(github) }}
         run: | 
-            echo "Ref": 
-            echo "SHA":
-            echo "Actor":
-            echo "Workflow":
-            echo "Run ID":
-            echo "Run number":
+            echo "Ref": "$github.ref"
+            echo "SHA": "$github.sha"
+            echo "Actor": "$github.actor"
+            echo "Workflow": "$github.workflow"
+            echo "Run ID": "$github.run_id"
+            echo "Run number": "$github.run_number"
       - name: Retrieve Variable
-        run: echo ${{env.MY_VAR}}
+        run: echo ${{ vars.MY_VAR }}
