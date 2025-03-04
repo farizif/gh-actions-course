@@ -1,4 +1,7 @@
 name: 07 - Using Expressions
+run-name: 07 - Using Expressions | DEBUG - ${{ inputs.debug && 'ON' || 'OFF' }} 
+
+
 
 on:
   push:
@@ -6,23 +9,22 @@ on:
     inputs:
       debug:
         type: boolean
-        default: false
 
 jobs:
   echo:
     runs-on: ubuntu-latest
     steps:
-      - name: Debug Information
-        if: ${{ github.event_name == 'push' }}
+      - name: '[debug] Print Information'
+        if: inputs.debug
         run: |
           echo "Triggered by: ${{ github.actor }}"
           echo "Branch: ${{ github.ref_name }}"
           echo "Commit SHA: ${{ github.sha }}"
-          echo "Runner OS: ${{ github.runner.os }}"
+          echo "Runner OS: ${{ runner.os }}"
 
 
-      - name: Print when triggered from main
-        if: ${{ github.ref  == 'refs/heads/main' && inputs.debug == 'true'}}
+      - name: '[debug] Print when triggered from main' 
+        if: inputs.debug && github.ref == 'refs/heads/main'
         run:  echo "I was triggered from main"
 
       - name: Greeting
