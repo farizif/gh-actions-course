@@ -51,5 +51,5 @@ jobs:
         steps:
             - name: Print Undefined Variables
               run: |
-                echo "Org var: ${{ vars.REPOSITORY_VAR }}"
+                echo "Org var: ${{ env.UNDEFINED_VAR_WITH_DEFAULT }}"
             
