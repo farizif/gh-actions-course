@@ -25,7 +25,7 @@ jobs:
 
     deploy:
         runs-on: ubuntu-latest
-        if: ${{ success() && contains(inputs.dry-run, 'true') }}
+        if: ${{ success() && contains(inputs.dry-run, 'false') }}
         environment: target
         steps:
             - name: Deploy
