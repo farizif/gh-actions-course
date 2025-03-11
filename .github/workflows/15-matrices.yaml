@@ -3,9 +3,10 @@ on:
     workflow_dispatch:
 jobs:
     backwards-compatibility:
-        runs-on: ubuntu-latest
+        runs-on: ${{matrix.os}}
         name: ${{ matrix.os }}-${{ matrix.node }}
         strategy:
+            fail-fast: false
             matrix:
                 node: [18.x, 20.x, 21.x]
                 os: 
@@ -13,10 +14,11 @@ jobs:
                     - windows-latest
                 include:
                     - os: ubuntu-latest
-                      tag: linux
+                      node: 16
                     - os: ubuntu-latest
                       node: 21.x
-            fail-fast: true
+                      tag: experimental
+            
         steps:
         - name: Setup node
           uses: actions/setup-node@v3
