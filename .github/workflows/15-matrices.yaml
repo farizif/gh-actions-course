@@ -16,7 +16,7 @@ jobs:
                       tag: linux
                     - os: ubuntu-latest
                       node: 21.x
-            fail-fast: false
+            fail-fast: true
         steps:
         - name: Setup node
           uses: actions/setup-node@v3
