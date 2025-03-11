@@ -4,7 +4,7 @@ on:
 jobs:
     backwards-compatibility:
         runs-on: ${{matrix.os}}
-        name: ${{ matrix.os }}-${{ matrix.node }}
+        name: ${{ matrix.os }}-${{ matrix.node }}- ${{ matrix.opacity }}  
         strategy:
             fail-fast: true
             matrix:
@@ -13,6 +13,7 @@ jobs:
                     - ubuntu-latest
                     - windows-latest
                 include:
+                    - opacity: 50
                     - os: ubuntu-latest
                       node: 16.x
                     - os: ubuntu-latest
@@ -36,7 +37,7 @@ jobs:
 
     include-example:
         runs-on: ubuntu-latest
-        name: ${{ matrix.color }}-${{ matrix.shape }}-${{ matrix.size }}
+        name: ${{ matrix.color }}-${{ matrix.shape }}-${{ matrix.size }}-${{ matrix.opacity }}
         strategy:
             matrix:
                 color: [red, green]
