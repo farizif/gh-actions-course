@@ -4,7 +4,7 @@ on:
 jobs:
     backwards-compatibility:
         runs-on: ${{matrix.os}}
-        name: ${{ matrix.os }}-${{ matrix.node }}- ${{ matrix.opacity }}  
+        name: ${{ matrix.os }}-${{ matrix.node }}
         strategy:
             fail-fast: true
             matrix:
@@ -13,7 +13,6 @@ jobs:
                     - ubuntu-latest
                     - windows-latest
                 include:
-                    - opacity: 50
                     - os: ubuntu-latest
                       node: 16.x
                     - os: ubuntu-latest
@@ -44,8 +43,9 @@ jobs:
                 shape: [circle, square]
                 size: [small, large]
                 include: 
+                - opacity: 50
                 - color: red
                   shape: triangle
         steps:
             - name: Dummy step
-              run: echo ${{ matrix.color }}-${{ matrix.shape }}-${{ matrix.size }}
+              run: echo ${{ matrix.color }}-${{ matrix.shape }}-${{ matrix.size }}- ${{ matrix.opacity }}  
