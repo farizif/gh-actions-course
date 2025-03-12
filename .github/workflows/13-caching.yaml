@@ -101,8 +101,8 @@ jobs:
         with:
             path: 13-caching/react-app/node_modules
             key: deps-node-modules-${{ hashFiles('13-caching/react-app/package-lock.json') }}
-          run: |
-            echo ${{needs.install-deps.outputs.outputs1}}
+            run: |
+              echo ${{needs.install-deps.outputs.outputs1}}
   
 
 
