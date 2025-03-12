@@ -5,8 +5,16 @@ on:
          target-env:
            type: environment
            default: staging
-    run-name: 16 - Working with Environments | env - <retrieve target-env input here>
-    jobs:
-        echo:
+
+jobs:
+      echo:
+        runs-on: ubuntu-latest
+        environment: ${{ inputs.target-env }}
+        env:
+            my-env-value: ${{ vars.MY_ENV_VALUE || 'default_value' }}
+        steps:
+          - name: Echo vars
+            run: |
+              echo "Env variable: ${{ vars.MY_ENV_VALUE }}"
 
 
