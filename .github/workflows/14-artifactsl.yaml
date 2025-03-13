@@ -30,7 +30,17 @@ jobs:
               if: steps.cache.outputs.cache-hit != 'true'
               run: npm ci
             - name: Unit tests
-              run: npm run test
+              uses: npm run test
+            - name: Upload build files
+              uses: actions/upload-artifact@v3
+              with:
+                name: ${{ env.build-artifact-key }}
+                path: 14-artifacts/react-app/build
+            - name: Upload test result
+              uses: actions/upload-artifact@v3
+              with:
+                name: ${{ env.test-report-key }}        
+                path: 14-artifacts/react-app-coverage
             - name: Build code
               run: npm run build
             - name: Upload build files
