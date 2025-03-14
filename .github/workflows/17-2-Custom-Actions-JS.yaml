@@ -1,5 +1,5 @@
 name: 17 - 2 - Custom Actions - JS
-run-name: 17 - 2 - Custom Actions - JS
+run-name: 17 - 2 - Custom Actions - JS | BB ${{ inputs.base-branch }} - TB ${{ inputs.target-branch }}- WD ${{ inputs.working-dir }}
 
 
 on:
@@ -10,26 +10,37 @@ on:
       description: The branch used as the base for the dependency update checks
       default: main
       required: false
-     target-branch:
+     head-branch:
       type: string
       description: The branch from which the PR is created
       default: update-dependencies
       required: false
      working-dir:
       description: The working directory of the project to check for dependency updates.
+      default: 17-custom-actions/react-app
       required: true
      debug:
+      type: boolean
       description: Whether the output debug messages to the console.
       default: false
     
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   dependency-update:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout code
+      - name: Checkout code
         uses: actions/checkout@v4 
-      - name: check for dependency updates
+      - name: Check for dependency updates
         uses: ./.github/actions/js-dependency-update
+        with: 
+          base-branch: ${{ inputs.base-branch }}
+          head-branch: ${{ inputs.head-branch }}
+          working-directory: ${{ inputs.working-dir }}
+          gh-token: ${{ secrets.GITHUB_TOKEN }}
+          debug: ${{ inputs.debug }}
     
     
